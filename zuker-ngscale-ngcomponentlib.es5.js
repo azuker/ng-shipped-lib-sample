@@ -1,8 +1,8 @@
 import { APP_ID, APP_INITIALIZER, ApplicationInitStatus, ApplicationModule, ApplicationRef, Attribute, ChangeDetectorRef, Component, ComponentFactoryResolver, ContentChild, ContentChildren, Directive, ElementRef, ErrorHandler, EventEmitter, Host, Inject, Injectable, InjectionToken, Injector, Input, IterableDiffers, KeyValueDiffers, LOCALE_ID, NgModule, NgModuleRef, NgProbeToken, NgZone, Optional, Output, PLATFORM_ID, PLATFORM_INITIALIZER, Pipe, Renderer2, RendererFactory2, RendererStyleFlags2, Sanitizer, SecurityContext, SkipSelf, TemplateRef, Testability, Version, ViewChild, ViewContainerRef, ViewEncapsulation, WrappedValue, createPlatformFactory, getDebugNode, isDevMode, platformCore, setTestabilityGetter, ɵglobal, ɵisListLikeIterable, ɵisObservable, ɵisPromise, ɵstringify } from '@angular/core';
 
 /**
- * @license Angular v5.0.5
- * (c) 2010-2017 Google, Inc. https://angular.io/
+ * @license Angular v5.2.0
+ * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 /**
@@ -49,7 +49,7 @@ import { APP_ID, APP_INITIALIZER, ApplicationInitStatus, ApplicationModule, Appl
  * \@experimental Animation support is experimental.
  * @abstract
  */
-var AnimationBuilder = (function () {
+var AnimationBuilder = /** @class */ (function () {
     function AnimationBuilder() {
     }
     return AnimationBuilder;
@@ -61,7 +61,7 @@ var AnimationBuilder = (function () {
  * \@experimental Animation support is experimental.
  * @abstract
  */
-var AnimationFactory = (function () {
+var AnimationFactory = /** @class */ (function () {
     function AnimationFactory() {
     }
     return AnimationFactory;
@@ -731,13 +731,6 @@ function scheduleMicroTask(cb) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * AnimationPlayer controls an animation sequence that was produced from a programmatic animation.
  * (see {\@link AnimationBuilder AnimationBuilder} for more information on how to create programmatic
  * animations.)
@@ -749,7 +742,7 @@ function scheduleMicroTask(cb) {
 /**
  * \@experimental Animation support is experimental.
  */
-var NoopAnimationPlayer = (function () {
+var NoopAnimationPlayer = /** @class */ (function () {
     function NoopAnimationPlayer() {
         this._onDoneFns = [];
         this._onStartFns = [];
@@ -822,8 +815,8 @@ var NoopAnimationPlayer = (function () {
      */
     function () {
         if (!this.hasStarted()) {
-            this.triggerMicrotask();
             this._onStart();
+            this.triggerMicrotask();
         }
         this._started = true;
     };
@@ -937,7 +930,7 @@ var NoopAnimationPlayer = (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var AnimationGroupPlayer = (function () {
+var AnimationGroupPlayer = /** @class */ (function () {
     function AnimationGroupPlayer(_players) {
         var _this = this;
         this._onDoneFns = [];
@@ -958,19 +951,18 @@ var AnimationGroupPlayer = (function () {
         }
         else {
             this.players.forEach(function (player) {
-                player.parentPlayer = _this;
                 player.onDone(function () {
-                    if (++doneCount >= total) {
+                    if (++doneCount == total) {
                         _this._onFinish();
                     }
                 });
                 player.onDestroy(function () {
-                    if (++destroyCount >= total) {
+                    if (++destroyCount == total) {
                         _this._onDestroy();
                     }
                 });
                 player.onStart(function () {
-                    if (++startCount >= total) {
+                    if (++startCount == total) {
                         _this._onStart();
                     }
                 });
@@ -1015,9 +1007,9 @@ var AnimationGroupPlayer = (function () {
      */
     function () {
         if (!this.hasStarted()) {
+            this._started = true;
             this._onStartFns.forEach(function (fn) { return fn(); });
             this._onStartFns = [];
-            this._started = true;
         }
     };
     /**
@@ -1178,13 +1170,6 @@ var AnimationGroupPlayer = (function () {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 var ɵPRE_STYLE = '!';
 
@@ -1478,8 +1463,8 @@ var __assign = Object.assign || function __assign(t) {
 };
 
 /**
- * @license Angular v5.0.5
- * (c) 2010-2017 Google, Inc. https://angular.io/
+ * @license Angular v5.2.0
+ * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 /**
@@ -1516,7 +1501,7 @@ var __assign = Object.assign || function __assign(t) {
  * \@stable
  * @abstract
  */
-var PlatformLocation = (function () {
+var PlatformLocation = /** @class */ (function () {
     function PlatformLocation() {
     }
     return PlatformLocation;
@@ -1568,7 +1553,7 @@ var LOCATION_INITIALIZED = new InjectionToken('Location Initialized');
  * \@stable
  * @abstract
  */
-var LocationStrategy = (function () {
+var LocationStrategy = /** @class */ (function () {
     function LocationStrategy() {
     }
     return LocationStrategy;
@@ -1634,7 +1619,7 @@ var APP_BASE_HREF = new InjectionToken('appBaseHref');
  * {\@example common/location/ts/path_location_component.ts region='LocationComponent'}
  * \@stable
  */
-var Location = (function () {
+var Location = /** @class */ (function () {
     function Location(platformStrategy) {
         var _this = this;
         /**
@@ -1948,7 +1933,7 @@ function _stripIndexHtml(url) {
  *
  * \@stable
  */
-var HashLocationStrategy = (function (_super) {
+var HashLocationStrategy = /** @class */ (function (_super) {
     __extends(HashLocationStrategy, _super);
     function HashLocationStrategy(_platformLocation, _baseHref) {
         var _this = _super.call(this) || this;
@@ -2111,7 +2096,7 @@ var HashLocationStrategy = (function (_super) {
  *
  * \@stable
  */
-var PathLocationStrategy = (function (_super) {
+var PathLocationStrategy = /** @class */ (function (_super) {
     __extends(PathLocationStrategy, _super);
     function PathLocationStrategy(_platformLocation, href) {
         var _this = _super.call(this) || this;
@@ -2248,7 +2233,16 @@ var PathLocationStrategy = (function (_super) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * \@experimental
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+// THIS CODE IS GENERATED - DO NOT MODIFY
+// See angular/tools/gulp-tasks/cldr/extract.js
+/**
+ * \@internal
  */
 var CURRENCIES = {
     'AOA': [, 'Kz'],
@@ -2367,6 +2361,16 @@ var CURRENCIES = {
  */
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
+/**
+ * @param {?} n
+ * @return {?}
+ */
+function converter(n) {
+    var /** @type {?} */ i = Math.floor(Math.abs(n)), /** @type {?} */ v = n.toString().replace(/^[^.]*\.?/, '').length;
+    if (i === 1 && v === 0)
+        return 1;
+    return 5;
+}
 var localeEn = [
     'en',
     [
@@ -2401,18 +2405,19 @@ var localeEn = [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'US Dollar',
-    function (n) {
-        var /** @type {?} */ i = Math.floor(Math.abs(n)), /** @type {?} */ v = n.toString().replace(/^[^.]*\.?/, '').length;
-        if (i === 1 && v === 0)
-            return 1;
-        return 5;
-    }
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'US Dollar', converter
 ];
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
  * \@experimental i18n support is experimental.
@@ -2867,17 +2872,20 @@ function findLocaleData(locale) {
 }
 /**
  * Return the currency symbol for a given currency code, or the code if no symbol available
- * (e.g.: $, US$, or USD)
+ * (e.g.: format narrow = $, format wide = US$, code = USD)
  *
- * \@internal
+ * \@experimental i18n support is experimental.
  * @param {?} code
  * @param {?} format
  * @return {?}
  */
-function findCurrencySymbol(code, format) {
-    var /** @type {?} */ currency = CURRENCIES[code] || {};
-    var /** @type {?} */ symbol = currency[0] || code;
-    return format === 'wide' ? symbol : currency[1] || symbol;
+function getCurrencySymbol(code, format) {
+    var /** @type {?} */ currency = CURRENCIES[code] || [];
+    var /** @type {?} */ symbolNarrow = currency[1];
+    if (format === 'narrow' && typeof symbolNarrow === 'string') {
+        return symbolNarrow;
+    }
+    return currency[0] || code;
 }
 
 /**
@@ -2899,7 +2907,7 @@ var DEPRECATED_PLURAL_FN = new InjectionToken('UseV4Plurals');
  * \@experimental
  * @abstract
  */
-var NgLocalization = (function () {
+var NgLocalization = /** @class */ (function () {
     function NgLocalization() {
     }
     return NgLocalization;
@@ -2908,8 +2916,6 @@ var NgLocalization = (function () {
  * Returns the plural category for a given value.
  * - "=value" when the case exists,
  * - the plural category otherwise
- *
- * \@internal
  * @param {?} value
  * @param {?} cases
  * @param {?} ngLocalization
@@ -2935,7 +2941,7 @@ function getPluralCategory(value, cases, ngLocalization, locale) {
  *
  * \@experimental
  */
-var NgLocaleLocalization = (function (_super) {
+var NgLocaleLocalization = /** @class */ (function (_super) {
     __extends(NgLocaleLocalization, _super);
     function NgLocaleLocalization(locale, /** @deprecated from v5 */
         deprecatedPluralFn) {
@@ -2985,6 +2991,13 @@ var NgLocaleLocalization = (function (_super) {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
  * @param {?} cookieStr
@@ -3043,7 +3056,7 @@ function parseCookieValue(cookieStr, name) {
  *
  * \@stable
  */
-var NgClass = (function () {
+var NgClass = /** @class */ (function () {
     function NgClass(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
         this._iterableDiffers = _iterableDiffers;
         this._keyValueDiffers = _keyValueDiffers;
@@ -3299,7 +3312,7 @@ var NgClass = (function () {
  *
  * \@experimental
  */
-var NgComponentOutlet = (function () {
+var NgComponentOutlet = /** @class */ (function () {
     function NgComponentOutlet(_viewContainerRef) {
         this._viewContainerRef = _viewContainerRef;
         this._componentRef = null;
@@ -3375,7 +3388,7 @@ var NgComponentOutlet = (function () {
 /**
  * \@stable
  */
-var NgForOfContext = (function () {
+var NgForOfContext = /** @class */ (function () {
     function NgForOfContext($implicit, ngForOf, index, count) {
         this.$implicit = $implicit;
         this.ngForOf = ngForOf;
@@ -3486,7 +3499,7 @@ var NgForOfContext = (function () {
  *
  * \@stable
  */
-var NgForOf = (function () {
+var NgForOf = /** @class */ (function () {
     function NgForOf(_viewContainer, _template, _differs) {
         this._viewContainer = _viewContainer;
         this._template = _template;
@@ -3635,7 +3648,7 @@ var NgForOf = (function () {
     };
     return NgForOf;
 }());
-var RecordViewTuple = (function () {
+var RecordViewTuple = /** @class */ (function () {
     function RecordViewTuple(record, view) {
         this.record = record;
         this.view = view;
@@ -3750,7 +3763,7 @@ function getTypeNameForDebugging(type) {
  *
  * \@stable
  */
-var NgIf = (function () {
+var NgIf = /** @class */ (function () {
     function NgIf(_viewContainer, templateRef) {
         this._viewContainer = _viewContainer;
         this._context = new NgIfContext();
@@ -3844,7 +3857,7 @@ var NgIf = (function () {
 /**
  * \@stable
  */
-var NgIfContext = (function () {
+var NgIfContext = /** @class */ (function () {
     function NgIfContext() {
         this.$implicit = null;
         this.ngIf = null;
@@ -3863,7 +3876,7 @@ var NgIfContext = (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var SwitchView = (function () {
+var SwitchView = /** @class */ (function () {
     function SwitchView(_viewContainerRef, _templateRef) {
         this._viewContainerRef = _viewContainerRef;
         this._templateRef = _templateRef;
@@ -3948,7 +3961,7 @@ var SwitchView = (function () {
  *
  * \@stable
  */
-var NgSwitch = (function () {
+var NgSwitch = /** @class */ (function () {
     function NgSwitch() {
         this._defaultUsed = false;
         this._caseCount = 0;
@@ -4069,7 +4082,7 @@ var NgSwitch = (function () {
  *
  * \@stable
  */
-var NgSwitchCase = (function () {
+var NgSwitchCase = /** @class */ (function () {
     function NgSwitchCase(viewContainer, templateRef, ngSwitch) {
         this.ngSwitch = ngSwitch;
         ngSwitch._addCase();
@@ -4119,7 +4132,7 @@ var NgSwitchCase = (function () {
  *
  * \@stable
  */
-var NgSwitchDefault = (function () {
+var NgSwitchDefault = /** @class */ (function () {
     function NgSwitchDefault(viewContainer, templateRef, ngSwitch) {
         ngSwitch._addDefault(new SwitchView(viewContainer, templateRef));
     }
@@ -4177,7 +4190,7 @@ var NgSwitchDefault = (function () {
  *
  * \@experimental
  */
-var NgPlural = (function () {
+var NgPlural = /** @class */ (function () {
     function NgPlural(_localization) {
         this._localization = _localization;
         this._caseViews = {};
@@ -4271,7 +4284,7 @@ var NgPlural = (function () {
  *
  * \@experimental
  */
-var NgPluralCase = (function () {
+var NgPluralCase = /** @class */ (function () {
     function NgPluralCase(value, template, viewContainer, ngPlural) {
         this.value = value;
         var /** @type {?} */ isANumber = !isNaN(Number(value));
@@ -4323,7 +4336,7 @@ var NgPluralCase = (function () {
  *
  * \@stable
  */
-var NgStyle = (function () {
+var NgStyle = /** @class */ (function () {
     function NgStyle(_differs, _ngEl, _renderer) {
         this._differs = _differs;
         this._ngEl = _ngEl;
@@ -4436,7 +4449,7 @@ var NgStyle = (function () {
  *
  * \@stable
  */
-var NgTemplateOutlet = (function () {
+var NgTemplateOutlet = /** @class */ (function () {
     function NgTemplateOutlet(_viewContainerRef) {
         this._viewContainerRef = _viewContainerRef;
     }
@@ -4547,6 +4560,13 @@ var NgTemplateOutlet = (function () {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 /**
  * A collection of Angular directives that are likely to be used in each and every Angular
@@ -4888,6 +4908,13 @@ function getDateTranslation(date, locale, name, width, form, extended) {
             return getLocaleDayPeriods(locale, form, /** @type {?} */ (width))[currentHours_1 < 12 ? 0 : 1];
         case TranslationType.Eras:
             return getLocaleEraNames(locale, /** @type {?} */ (width))[date.getFullYear() <= 0 ? 0 : 1];
+        default:
+            // This default case is not needed by TypeScript compiler, as the switch is exhaustive.
+            // However Closure Compiler does not understand that and reports an error in typed mode.
+            // The `throw new Error` below works around the problem, and the unexpected: never variable
+            // makes sure tsc still checks this code is unreachable.
+            var /** @type {?} */ unexpected = name;
+            throw new Error("unexpected translation type " + unexpected);
     }
 }
 /**
@@ -5359,7 +5386,7 @@ var ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\
  *
  * \@stable
  */
-var DatePipe = (function () {
+var DatePipe = /** @class */ (function () {
     function DatePipe(locale) {
         this.locale = locale;
     }
@@ -5505,10 +5532,6 @@ function formatNumber$1(value, locale, style, digitsInfo, currency) {
     else {
         num = value;
     }
-    if (style === NumberFormatStyle.Percent) {
-        num = num * 100;
-    }
-    var /** @type {?} */ numStr = Math.abs(num) + '';
     var /** @type {?} */ pattern = parseNumberFormat(format, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign));
     var /** @type {?} */ formattedText = '';
     var /** @type {?} */ isZero = false;
@@ -5516,7 +5539,10 @@ function formatNumber$1(value, locale, style, digitsInfo, currency) {
         formattedText = getLocaleNumberSymbol(locale, NumberSymbol.Infinity);
     }
     else {
-        var /** @type {?} */ parsedNumber = parseNumber(numStr);
+        var /** @type {?} */ parsedNumber = parseNumber(num);
+        if (style === NumberFormatStyle.Percent) {
+            parsedNumber = toPercent(parsedNumber);
+        }
         var /** @type {?} */ minInt = pattern.minInt;
         var /** @type {?} */ minFraction = pattern.minFrac;
         var /** @type {?} */ maxFraction = pattern.maxFrac;
@@ -5662,12 +5688,38 @@ function parseNumberFormat(format, minusSign) {
     return p;
 }
 /**
- * Parse a number (as a string)
- * Significant bits of this parse algorithm came from https://github.com/MikeMcl/big.js/
- * @param {?} numStr
+ * @param {?} parsedNumber
  * @return {?}
  */
-function parseNumber(numStr) {
+function toPercent(parsedNumber) {
+    // if the number is 0, don't do anything
+    if (parsedNumber.digits[0] === 0) {
+        return parsedNumber;
+    }
+    // Getting the current number of decimals
+    var /** @type {?} */ fractionLen = parsedNumber.digits.length - parsedNumber.integerLen;
+    if (parsedNumber.exponent) {
+        parsedNumber.exponent += 2;
+    }
+    else {
+        if (fractionLen === 0) {
+            parsedNumber.digits.push(0, 0);
+        }
+        else if (fractionLen === 1) {
+            parsedNumber.digits.push(0);
+        }
+        parsedNumber.integerLen += 2;
+    }
+    return parsedNumber;
+}
+/**
+ * Parses a number.
+ * Significant bits of this parse algorithm came from https://github.com/MikeMcl/big.js/
+ * @param {?} num
+ * @return {?}
+ */
+function parseNumber(num) {
+    var /** @type {?} */ numStr = Math.abs(num) + '';
     var /** @type {?} */ exponent = 0, /** @type {?} */ digits, /** @type {?} */ integerLen;
     var /** @type {?} */ i, /** @type {?} */ j, /** @type {?} */ zeros;
     // Decimal point?
@@ -5767,11 +5819,24 @@ function roundNumber(parsedNumber, minFrac, maxFrac) {
     // Pad out with zeros to get the required fraction length
     for (; fractionLen < Math.max(0, fractionSize); fractionLen++)
         digits.push(0);
+    var /** @type {?} */ dropTrailingZeros = fractionSize !== 0;
+    // Minimal length = nb of decimals required + current nb of integers
+    // Any number besides that is optional and can be removed if it's a trailing 0
+    var /** @type {?} */ minLen = minFrac + parsedNumber.integerLen;
     // Do any carrying, e.g. a digit was rounded up to 10
     var /** @type {?} */ carry = digits.reduceRight(function (carry, d, i, digits) {
         d = d + carry;
-        digits[i] = d % 10;
-        return Math.floor(d / 10);
+        digits[i] = d < 10 ? d : d - 10; // d % 10
+        if (dropTrailingZeros) {
+            // Do not keep meaningless fractional trailing zeros (e.g. 15.52000 --> 15.52)
+            if (digits[i] === 0 && i >= minLen) {
+                digits.pop();
+            }
+            else {
+                dropTrailingZeros = false;
+            }
+        }
+        return d >= 10 ? 1 : 0; // Math.floor(d / 10);
     }, 0);
     if (carry) {
         digits.unshift(carry);
@@ -5802,7 +5867,7 @@ function parseIntAutoRadix(text) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var ObservableStrategy = (function () {
+var ObservableStrategy = /** @class */ (function () {
     function ObservableStrategy() {
     }
     /**
@@ -5838,7 +5903,7 @@ var ObservableStrategy = (function () {
     function (subscription) { subscription.unsubscribe(); };
     return ObservableStrategy;
 }());
-var PromiseStrategy = (function () {
+var PromiseStrategy = /** @class */ (function () {
     function PromiseStrategy() {
     }
     /**
@@ -5901,7 +5966,7 @@ var _observableStrategy = new ObservableStrategy();
  *
  * \@stable
  */
-var AsyncPipe = (function () {
+var AsyncPipe = /** @class */ (function () {
     function AsyncPipe(_ref) {
         this._ref = _ref;
         this._latestValue = null;
@@ -6035,7 +6100,7 @@ var AsyncPipe = (function () {
  *
  * \@stable
  */
-var LowerCasePipe = (function () {
+var LowerCasePipe = /** @class */ (function () {
     function LowerCasePipe() {
     }
     /**
@@ -6078,7 +6143,7 @@ function titleCaseWord(word) {
  *
  * \@stable
  */
-var TitleCasePipe = (function () {
+var TitleCasePipe = /** @class */ (function () {
     function TitleCasePipe() {
     }
     /**
@@ -6109,7 +6174,7 @@ var TitleCasePipe = (function () {
  *
  * \@stable
  */
-var UpperCasePipe = (function () {
+var UpperCasePipe = /** @class */ (function () {
     function UpperCasePipe() {
     }
     /**
@@ -6167,7 +6232,7 @@ var _INTERPOLATION_REGEXP = /#/g;
  *
  * \@experimental
  */
-var I18nPluralPipe = (function () {
+var I18nPluralPipe = /** @class */ (function () {
     function I18nPluralPipe(_localization) {
         this._localization = _localization;
     }
@@ -6230,7 +6295,7 @@ var I18nPluralPipe = (function () {
  *
  *  \@experimental
  */
-var I18nSelectPipe = (function () {
+var I18nSelectPipe = /** @class */ (function () {
     function I18nSelectPipe() {
     }
     /**
@@ -6289,7 +6354,7 @@ var I18nSelectPipe = (function () {
  *
  * \@stable
  */
-var JsonPipe = (function () {
+var JsonPipe = /** @class */ (function () {
     function JsonPipe() {
     }
     /**
@@ -6346,7 +6411,7 @@ var JsonPipe = (function () {
  *
  * \@stable
  */
-var DecimalPipe = (function () {
+var DecimalPipe = /** @class */ (function () {
     function DecimalPipe(_locale) {
         this._locale = _locale;
     }
@@ -6400,7 +6465,7 @@ var DecimalPipe = (function () {
  *
  * \@stable
  */
-var PercentPipe = (function () {
+var PercentPipe = /** @class */ (function () {
     function PercentPipe(_locale) {
         this._locale = _locale;
     }
@@ -6462,7 +6527,7 @@ var PercentPipe = (function () {
  *
  * \@stable
  */
-var CurrencyPipe = (function () {
+var CurrencyPipe = /** @class */ (function () {
     function CurrencyPipe(_locale) {
         this._locale = _locale;
     }
@@ -6495,7 +6560,7 @@ var CurrencyPipe = (function () {
         }
         var /** @type {?} */ currency = currencyCode || 'USD';
         if (display !== 'code') {
-            currency = findCurrencySymbol(currency, display === 'symbol' ? 'wide' : 'narrow');
+            currency = getCurrencySymbol(currency, display === 'symbol' ? 'wide' : 'narrow');
         }
         var _a = formatNumber$1(value, locale, NumberFormatStyle.Currency, digits, currency), str = _a.str, error = _a.error;
         if (error) {
@@ -6575,7 +6640,7 @@ function isEmpty(value) {
  *
  * \@stable
  */
-var SlicePipe = (function () {
+var SlicePipe = /** @class */ (function () {
     function SlicePipe() {
     }
     /**
@@ -6627,11 +6692,6 @@ var SlicePipe = (function () {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * @module
- * @description
- * This module provides a set of common Pipes.
- */
-/**
  * A collection of Angular pipes that are likely to be used in each and every application.
  */
 var COMMON_PIPES = [
@@ -6665,7 +6725,7 @@ var COMMON_PIPES = [
  *
  * \@stable
  */
-var CommonModule = (function () {
+var CommonModule = /** @class */ (function () {
     function CommonModule() {
     }
     CommonModule.decorators = [
@@ -6726,23 +6786,25 @@ var PLATFORM_BROWSER_ID = 'browser';
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * @module
- * @description
- * Entry point for all public APIs of the common package.
- */
-/**
  * \@stable
  */
-var VERSION$1 = new Version('5.0.5');
+var VERSION$1 = new Version('5.2.0');
 
 /**
- * @license Angular v5.0.5
- * (c) 2010-2017 Google, Inc. https://angular.io/
+ * @license Angular v5.2.0
+ * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
  */
 var _DOM = /** @type {?} */ ((null));
 /**
@@ -6772,7 +6834,7 @@ function setRootDomAdapter(adapter) {
  * can introduce XSS risks.
  * @abstract
  */
-var DomAdapter = (function () {
+var DomAdapter = /** @class */ (function () {
     function DomAdapter() {
         this.resourceLoaderType = /** @type {?} */ ((null));
     }
@@ -6816,7 +6878,7 @@ var DomAdapter = (function () {
  * can introduce XSS risks.
  * @abstract
  */
-var GenericBrowserDomAdapter = (function (_super) {
+var GenericBrowserDomAdapter = /** @class */ (function (_super) {
     __extends(GenericBrowserDomAdapter, _super);
     function GenericBrowserDomAdapter() {
         var _this = _super.call(this) || this;
@@ -6989,7 +7051,7 @@ if (ɵglobal['Node']) {
  * \@security Tread carefully! Interacting with the DOM directly is dangerous and
  * can introduce XSS risks.
  */
-var BrowserDomAdapter = (function (_super) {
+var BrowserDomAdapter = /** @class */ (function (_super) {
     __extends(BrowserDomAdapter, _super);
     function BrowserDomAdapter() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -8350,6 +8412,13 @@ var DOCUMENT$1 = DOCUMENT;
  * @suppress {checkTypes} checked by tsc
  */
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * @return {?}
  */
 function supportsState() {
@@ -8372,7 +8441,7 @@ function supportsState() {
  * This class should not be used directly by an application developer. Instead, use
  * {\@link Location}.
  */
-var BrowserPlatformLocation = (function (_super) {
+var BrowserPlatformLocation = /** @class */ (function (_super) {
     __extends(BrowserPlatformLocation, _super);
     function BrowserPlatformLocation(_doc) {
         var _this = _super.call(this) || this;
@@ -8532,7 +8601,7 @@ var BrowserPlatformLocation = (function (_super) {
  *
  * \@experimental
  */
-var Meta = (function () {
+var Meta = /** @class */ (function () {
     function Meta(_doc) {
         this._doc = _doc;
         this._dom = getDOM();
@@ -8776,7 +8845,7 @@ var SERVER_TRANSITION_PROVIDERS = [
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var BrowserGetTestability = (function () {
+var BrowserGetTestability = /** @class */ (function () {
     function BrowserGetTestability() {
     }
     /**
@@ -8877,7 +8946,7 @@ var BrowserGetTestability = (function () {
  *
  * \@experimental
  */
-var Title = (function () {
+var Title = /** @class */ (function () {
     function Title(_doc) {
         this._doc = _doc;
     }
@@ -9033,7 +9102,7 @@ var EVENT_MANAGER_PLUGINS = new InjectionToken('EventManagerPlugins');
 /**
  * \@stable
  */
-var EventManager = (function () {
+var EventManager = /** @class */ (function () {
     function EventManager(plugins, _zone) {
         var _this = this;
         this._zone = _zone;
@@ -9119,7 +9188,7 @@ var EventManager = (function () {
 /**
  * @abstract
  */
-var EventManagerPlugin = (function () {
+var EventManagerPlugin = /** @class */ (function () {
     function EventManagerPlugin(_doc) {
         this._doc = _doc;
     }
@@ -9156,7 +9225,7 @@ var EventManagerPlugin = (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var SharedStylesHost = (function () {
+var SharedStylesHost = /** @class */ (function () {
     function SharedStylesHost() {
         /**
          * \@internal
@@ -9205,7 +9274,7 @@ var SharedStylesHost = (function () {
     SharedStylesHost.ctorParameters = function () { return []; };
     return SharedStylesHost;
 }());
-var DomSharedStylesHost = (function (_super) {
+var DomSharedStylesHost = /** @class */ (function (_super) {
     __extends(DomSharedStylesHost, _super);
     function DomSharedStylesHost(_doc) {
         var _this = _super.call(this) || this;
@@ -9352,7 +9421,7 @@ function decoratePreventDefault(eventHandler) {
         }
     };
 }
-var DomRendererFactory2 = (function () {
+var DomRendererFactory2 = /** @class */ (function () {
     function DomRendererFactory2(eventManager, sharedStylesHost) {
         this.eventManager = eventManager;
         this.sharedStylesHost = sharedStylesHost;
@@ -9420,7 +9489,7 @@ var DomRendererFactory2 = (function () {
     ]; };
     return DomRendererFactory2;
 }());
-var DefaultDomRenderer2 = (function () {
+var DefaultDomRenderer2 = /** @class */ (function () {
     function DefaultDomRenderer2(eventManager) {
         this.eventManager = eventManager;
         this.data = Object.create(null);
@@ -9724,7 +9793,7 @@ function checkNoSyntheticProp(name, nameKind) {
         throw new Error("Found the synthetic " + nameKind + " " + name + ". Please include either \"BrowserAnimationsModule\" or \"NoopAnimationsModule\" in your application.");
     }
 }
-var EmulatedEncapsulationDomRenderer2 = (function (_super) {
+var EmulatedEncapsulationDomRenderer2 = /** @class */ (function (_super) {
     __extends(EmulatedEncapsulationDomRenderer2, _super);
     function EmulatedEncapsulationDomRenderer2(eventManager, sharedStylesHost, component) {
         var _this = _super.call(this, eventManager) || this;
@@ -9761,7 +9830,7 @@ var EmulatedEncapsulationDomRenderer2 = (function (_super) {
     };
     return EmulatedEncapsulationDomRenderer2;
 }(DefaultDomRenderer2));
-var ShadowDomRenderer = (function (_super) {
+var ShadowDomRenderer = /** @class */ (function (_super) {
     __extends(ShadowDomRenderer, _super);
     function ShadowDomRenderer(eventManager, sharedStylesHost, hostEl, component) {
         var _this = _super.call(this, eventManager) || this;
@@ -9936,7 +10005,7 @@ var globalListener = function (event) {
         }
     }
 };
-var DomEventsPlugin = (function (_super) {
+var DomEventsPlugin = /** @class */ (function (_super) {
     __extends(DomEventsPlugin, _super);
     function DomEventsPlugin(doc, ngZone) {
         var _this = _super.call(this, doc) || this;
@@ -10169,7 +10238,7 @@ var HAMMER_GESTURE_CONFIG = new InjectionToken('HammerGestureConfig');
 /**
  * \@experimental
  */
-var HammerGestureConfig = (function () {
+var HammerGestureConfig = /** @class */ (function () {
     function HammerGestureConfig() {
         this.events = [];
         this.overrides = {};
@@ -10198,7 +10267,7 @@ var HammerGestureConfig = (function () {
     HammerGestureConfig.ctorParameters = function () { return []; };
     return HammerGestureConfig;
 }());
-var HammerGesturesPlugin = (function (_super) {
+var HammerGesturesPlugin = /** @class */ (function (_super) {
     __extends(HammerGesturesPlugin, _super);
     function HammerGesturesPlugin(doc, _config) {
         var _this = _super.call(this, doc) || this;
@@ -10293,7 +10362,7 @@ var MODIFIER_KEY_GETTERS = {
 /**
  * \@experimental
  */
-var KeyEventsPlugin = (function (_super) {
+var KeyEventsPlugin = /** @class */ (function (_super) {
     __extends(KeyEventsPlugin, _super);
     function KeyEventsPlugin(doc) {
         return _super.call(this, doc) || this;
@@ -10615,7 +10684,7 @@ var VALID_ATTRS = merge(URI_ATTRS, SRCSET_ATTRS, HTML_ATTRS);
  * SanitizingHtmlSerializer serializes a DOM fragment, stripping out any unsafe elements and unsafe
  * attributes.
  */
-var SanitizingHtmlSerializer = (function () {
+var SanitizingHtmlSerializer = /** @class */ (function () {
     function SanitizingHtmlSerializer() {
         this.sanitizedSomething = false;
         this.buf = [];
@@ -11014,12 +11083,12 @@ function sanitizeStyle(value) {
  * \@stable
  * @abstract
  */
-var DomSanitizer = (function () {
+var DomSanitizer = /** @class */ (function () {
     function DomSanitizer() {
     }
     return DomSanitizer;
 }());
-var DomSanitizerImpl = (function (_super) {
+var DomSanitizerImpl = /** @class */ (function (_super) {
     __extends(DomSanitizerImpl, _super);
     function DomSanitizerImpl(_doc) {
         var _this = _super.call(this) || this;
@@ -11149,7 +11218,7 @@ var DomSanitizerImpl = (function (_super) {
 /**
  * @abstract
  */
-var SafeValueImpl = (function () {
+var SafeValueImpl = /** @class */ (function () {
     function SafeValueImpl(changingThisBreaksApplicationSecurity) {
         // empty
         this.changingThisBreaksApplicationSecurity = changingThisBreaksApplicationSecurity;
@@ -11166,7 +11235,7 @@ var SafeValueImpl = (function () {
     };
     return SafeValueImpl;
 }());
-var SafeHtmlImpl = (function (_super) {
+var SafeHtmlImpl = /** @class */ (function (_super) {
     __extends(SafeHtmlImpl, _super);
     function SafeHtmlImpl() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -11180,7 +11249,7 @@ var SafeHtmlImpl = (function (_super) {
     function () { return 'HTML'; };
     return SafeHtmlImpl;
 }(SafeValueImpl));
-var SafeStyleImpl = (function (_super) {
+var SafeStyleImpl = /** @class */ (function (_super) {
     __extends(SafeStyleImpl, _super);
     function SafeStyleImpl() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -11194,7 +11263,7 @@ var SafeStyleImpl = (function (_super) {
     function () { return 'Style'; };
     return SafeStyleImpl;
 }(SafeValueImpl));
-var SafeScriptImpl = (function (_super) {
+var SafeScriptImpl = /** @class */ (function (_super) {
     __extends(SafeScriptImpl, _super);
     function SafeScriptImpl() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -11208,7 +11277,7 @@ var SafeScriptImpl = (function (_super) {
     function () { return 'Script'; };
     return SafeScriptImpl;
 }(SafeValueImpl));
-var SafeUrlImpl = (function (_super) {
+var SafeUrlImpl = /** @class */ (function (_super) {
     __extends(SafeUrlImpl, _super);
     function SafeUrlImpl() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -11222,7 +11291,7 @@ var SafeUrlImpl = (function (_super) {
     function () { return 'URL'; };
     return SafeUrlImpl;
 }(SafeValueImpl));
-var SafeResourceUrlImpl = (function (_super) {
+var SafeResourceUrlImpl = /** @class */ (function (_super) {
     __extends(SafeResourceUrlImpl, _super);
     function SafeResourceUrlImpl() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -11292,7 +11361,7 @@ function _document() {
  *
  * \@stable
  */
-var BrowserModule = (function () {
+var BrowserModule = /** @class */ (function () {
     function BrowserModule(parentModule) {
         if (parentModule) {
             throw new Error("BrowserModule has already been loaded. If you need access to common directives such as NgIf and NgFor from a lazy loaded module, import CommonModule instead.");
@@ -11386,30 +11455,18 @@ var BrowserModule = (function () {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * @module
- * @description
- * Entry point for all public APIs of the common package.
- */
-/**
  * \@stable
  */
-var VERSION = new Version('5.0.5');
+var VERSION = new Version('5.2.0');
 
 /**
- * @license Angular v5.0.5
- * (c) 2010-2017 Google, Inc. https://angular.io/
+ * @license Angular v5.2.0
+ * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 /**
  * @param {?} players
@@ -11592,7 +11649,17 @@ if (typeof Element != 'undefined') {
         return results;
     };
 }
+/**
+ * @param {?} prop
+ * @return {?}
+ */
+function containsVendorPrefix(prop) {
+    // Webkit is the only real popular vendor prefix nowadays
+    // cc: http://shouldiprefix.com/
+    return prop.substring(1, 6) == 'ebkit'; // webkit or Webkit
+}
 var _CACHED_BODY = null;
+var _IS_WEBKIT = false;
 /**
  * @param {?} prop
  * @return {?}
@@ -11600,8 +11667,17 @@ var _CACHED_BODY = null;
 function validateStyleProperty(prop) {
     if (!_CACHED_BODY) {
         _CACHED_BODY = getBodyNode() || {};
+        _IS_WEBKIT = /** @type {?} */ ((_CACHED_BODY)).style ? ('WebkitAppearance' in /** @type {?} */ ((_CACHED_BODY)).style) : false;
     }
-    return /** @type {?} */ ((_CACHED_BODY)).style ? prop in /** @type {?} */ ((_CACHED_BODY)).style : true;
+    var /** @type {?} */ result = true;
+    if (/** @type {?} */ ((_CACHED_BODY)).style && !containsVendorPrefix(prop)) {
+        result = prop in /** @type {?} */ ((_CACHED_BODY)).style;
+        if (!result && _IS_WEBKIT) {
+            var /** @type {?} */ camelProp = 'Webkit' + prop.charAt(0).toUpperCase() + prop.substr(1);
+            result = camelProp in /** @type {?} */ ((_CACHED_BODY)).style;
+        }
+    }
+    return result;
 }
 /**
  * @return {?}
@@ -11621,16 +11697,9 @@ var invokeQuery = _query;
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * \@experimental
  */
-var NoopAnimationDriver = (function () {
+var NoopAnimationDriver = /** @class */ (function () {
     function NoopAnimationDriver() {
     }
     /**
@@ -11724,7 +11793,7 @@ var NoopAnimationDriver = (function () {
  * \@experimental
  * @abstract
  */
-var AnimationDriver = (function () {
+var AnimationDriver = /** @class */ (function () {
     function AnimationDriver() {
     }
     AnimationDriver.NOOP = new NoopAnimationDriver();
@@ -11734,13 +11803,6 @@ var AnimationDriver = (function () {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 var ONE_SECOND = 1000;
 var SUBSTITUTION_EXPR_START = '{{';
@@ -12117,12 +12179,12 @@ function parseAnimationAlias(alias, errors) {
             return '* => *';
     }
 }
-var TRUE_BOOLEAN_VALUES = new Set();
-TRUE_BOOLEAN_VALUES.add('true');
-TRUE_BOOLEAN_VALUES.add('1');
-var FALSE_BOOLEAN_VALUES = new Set();
-FALSE_BOOLEAN_VALUES.add('false');
-FALSE_BOOLEAN_VALUES.add('0');
+// DO NOT REFACTOR ... keep the follow set instantiations
+// with the values intact (closure compiler for some reason
+// removes follow-up lines that add the values outside of
+// the constructor...
+var TRUE_BOOLEAN_VALUES = new Set(['true', '1']);
+var FALSE_BOOLEAN_VALUES = new Set(['false', '0']);
 /**
  * @param {?} lhs
  * @param {?} rhs
@@ -12148,13 +12210,6 @@ function makeLambdaFromStates(lhs, rhs) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 var SELF_TOKEN = ':self';
 var SELF_TOKEN_REGEX = new RegExp("s*" + SELF_TOKEN + "s*,?", 'g');
 /**
@@ -12167,7 +12222,7 @@ function buildAnimationAst(driver, metadata, errors) {
     return new AnimationAstBuilderVisitor(driver).build(metadata, errors);
 }
 var ROOT_SELECTOR = '';
-var AnimationAstBuilderVisitor = (function () {
+var AnimationAstBuilderVisitor = /** @class */ (function () {
     function AnimationAstBuilderVisitor(_driver) {
         this._driver = _driver;
     }
@@ -12715,7 +12770,7 @@ function normalizeSelector(selector) {
 function normalizeParams(obj) {
     return obj ? copyObj(obj) : null;
 }
-var AnimationAstBuilderContext = (function () {
+var AnimationAstBuilderContext = /** @class */ (function () {
     function AnimationAstBuilderContext(errors) {
         this.errors = errors;
         this.queryCount = 0;
@@ -12850,7 +12905,7 @@ function createTimelineInstruction(element, keyframes$$1, preStyleProps, postSty
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-var ElementInstructionMap = (function () {
+var ElementInstructionMap = /** @class */ (function () {
     function ElementInstructionMap() {
         this._map = new Map();
     }
@@ -12912,13 +12967,6 @@ var ElementInstructionMap = (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 var ONE_FRAME_IN_MILLISECONDS = 1;
 var ENTER_TOKEN = ':enter';
 var ENTER_TOKEN_REGEX = new RegExp(ENTER_TOKEN, 'g');
@@ -12943,7 +12991,7 @@ function buildAnimationTimelines(driver, rootElement, ast, enterClassName, leave
     if (errors === void 0) { errors = []; }
     return new AnimationTimelineBuilderVisitor().buildKeyframes(driver, rootElement, ast, enterClassName, leaveClassName, startingStyles, finalStyles, options, subInstructions, errors);
 }
-var AnimationTimelineBuilderVisitor = (function () {
+var AnimationTimelineBuilderVisitor = /** @class */ (function () {
     function AnimationTimelineBuilderVisitor() {
     }
     /**
@@ -13386,7 +13434,7 @@ var AnimationTimelineBuilderVisitor = (function () {
     return AnimationTimelineBuilderVisitor;
 }());
 var DEFAULT_NOOP_PREVIOUS_NODE = /** @type {?} */ ({});
-var AnimationTimelineContext = (function () {
+var AnimationTimelineContext = /** @class */ (function () {
     function AnimationTimelineContext(_driver, element, subInstructions, _enterClassName, _leaveClassName, errors, timelines, initialTimeline) {
         this._driver = _driver;
         this.element = element;
@@ -13596,7 +13644,7 @@ var AnimationTimelineContext = (function () {
     };
     return AnimationTimelineContext;
 }());
-var TimelineBuilder = (function () {
+var TimelineBuilder = /** @class */ (function () {
     function TimelineBuilder(_driver, element, startTime, _elementTimelineStylesLookup) {
         this._driver = _driver;
         this.element = element;
@@ -13927,7 +13975,7 @@ var TimelineBuilder = (function () {
     };
     return TimelineBuilder;
 }());
-var SubTimelineBuilder = (function (_super) {
+var SubTimelineBuilder = /** @class */ (function (_super) {
     __extends(SubTimelineBuilder, _super);
     function SubTimelineBuilder(driver, element, keyframes$$1, preStyleProps, postStyleProps, timings, _stretchStartingKeyframe) {
         if (_stretchStartingKeyframe === void 0) { _stretchStartingKeyframe = false; }
@@ -14035,10 +14083,17 @@ function flattenStyles$1(input, allStyles) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * \@experimental Animation support is experimental.
  * @abstract
  */
-var AnimationStyleNormalizer = (function () {
+var AnimationStyleNormalizer = /** @class */ (function () {
     function AnimationStyleNormalizer() {
     }
     return AnimationStyleNormalizer;
@@ -14047,14 +14102,7 @@ var AnimationStyleNormalizer = (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-var WebAnimationsStyleNormalizer = (function (_super) {
+var WebAnimationsStyleNormalizer = /** @class */ (function (_super) {
     __extends(WebAnimationsStyleNormalizer, _super);
     function WebAnimationsStyleNormalizer() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -14162,7 +14210,7 @@ function createTransitionInstruction(element, triggerName, fromState, toState, i
  * @suppress {checkTypes} checked by tsc
  */
 var EMPTY_OBJECT = {};
-var AnimationTransitionFactory = (function () {
+var AnimationTransitionFactory = /** @class */ (function () {
     function AnimationTransitionFactory(_triggerName, ast, _stateStyles) {
         this._triggerName = _triggerName;
         this.ast = ast;
@@ -14263,7 +14311,7 @@ var AnimationTransitionFactory = (function () {
 function oneOrMoreTransitionsMatch(matchFns, currentState, nextState) {
     return matchFns.some(function (fn) { return fn(currentState, nextState); });
 }
-var AnimationStateStyles = (function () {
+var AnimationStateStyles = /** @class */ (function () {
     function AnimationStateStyles(styles, defaultParams) {
         this.styles = styles;
         this.defaultParams = defaultParams;
@@ -14320,7 +14368,7 @@ function buildTrigger(name, ast) {
 /**
  * \@experimental Animation support is experimental.
  */
-var AnimationTrigger = (function () {
+var AnimationTrigger = /** @class */ (function () {
     function AnimationTrigger(name, ast) {
         var _this = this;
         this.name = name;
@@ -14416,15 +14464,8 @@ function balanceProperties(obj, key1, key2) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 var EMPTY_INSTRUCTION_MAP = new ElementInstructionMap();
-var TimelineAnimationEngine = (function () {
+var TimelineAnimationEngine = /** @class */ (function () {
     function TimelineAnimationEngine(_driver, _normalizer) {
         this._driver = _driver;
         this._normalizer = _normalizer;
@@ -14626,13 +14667,6 @@ var TimelineAnimationEngine = (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 var QUEUED_CLASSNAME = 'ng-animate-queued';
 var QUEUED_SELECTOR = '.ng-animate-queued';
 var DISABLED_CLASSNAME = 'ng-animate-disabled';
@@ -14661,7 +14695,7 @@ var REMOVAL_FLAG = '__ng_removed';
  * @record
  */
 
-var StateValue = (function () {
+var StateValue = /** @class */ (function () {
     function StateValue(input, namespaceId) {
         if (namespaceId === void 0) { namespaceId = ''; }
         this.namespaceId = namespaceId;
@@ -14712,7 +14746,7 @@ var StateValue = (function () {
 var VOID_VALUE = 'void';
 var DEFAULT_STATE_VALUE = new StateValue(VOID_VALUE);
 var DELETED_STATE_VALUE = new StateValue('DELETED');
-var AnimationTransitionNamespace = (function () {
+var AnimationTransitionNamespace = /** @class */ (function () {
     function AnimationTransitionNamespace(id, hostElement, _engine) {
         this.id = id;
         this.hostElement = hostElement;
@@ -14968,9 +15002,13 @@ var AnimationTransitionNamespace = (function () {
         // If there are no animations found for any of the nodes then clear the cache
         // for the element.
         this._engine.driver.query(rootElement, NG_TRIGGER_SELECTOR, true).forEach(function (elm) {
+            // this means that an inner remove() operation has already kicked off
+            // the animation on this element...
+            if (elm[REMOVAL_FLAG])
+                return;
             var /** @type {?} */ namespaces = _this._engine.fetchNamespacesByElement(elm);
             if (namespaces.size) {
-                namespaces.forEach(function (ns) { ns.triggerLeaveAnimation(elm, context, false, true); });
+                namespaces.forEach(function (ns) { return ns.triggerLeaveAnimation(elm, context, false, true); });
             }
             else {
                 _this.clearElementCache(elm);
@@ -15207,7 +15245,7 @@ var AnimationTransitionNamespace = (function () {
  * @record
  */
 
-var TransitionAnimationEngine = (function () {
+var TransitionAnimationEngine = /** @class */ (function () {
     function TransitionAnimationEngine(driver, _normalizer) {
         this.driver = driver;
         this._normalizer = _normalizer;
@@ -16316,7 +16354,7 @@ var TransitionAnimationEngine = (function () {
     };
     return TransitionAnimationEngine;
 }());
-var TransitionAnimationPlayer = (function () {
+var TransitionAnimationPlayer = /** @class */ (function () {
     function TransitionAnimationPlayer(namespaceId, triggerName, element) {
         this.namespaceId = namespaceId;
         this.triggerName = triggerName;
@@ -16326,15 +16364,8 @@ var TransitionAnimationPlayer = (function () {
         this._queuedCallbacks = {};
         this.destroyed = false;
         this.markedForDestroy = false;
+        this.queued = true;
     }
-    Object.defineProperty(TransitionAnimationPlayer.prototype, "queued", {
-        get: /**
-         * @return {?}
-         */
-        function () { return this._containsRealPlayer == false; },
-        enumerable: true,
-        configurable: true
-    });
     /**
      * @param {?} player
      * @return {?}
@@ -16353,6 +16384,7 @@ var TransitionAnimationPlayer = (function () {
         });
         this._queuedCallbacks = {};
         this._containsRealPlayer = true;
+        (/** @type {?} */ (this)).queued = false;
     };
     /**
      * @return {?}
@@ -16780,7 +16812,7 @@ function replacePostStylesAsPre(element, allPreStyleElements, allPostStyleElemen
         return false;
     var /** @type {?} */ preEntry = allPreStyleElements.get(element);
     if (preEntry) {
-        postEntry.forEach(function (data) { return /** @type {?} */ ((preEntry)).add(data); });
+        postEntry.forEach(function (data) { return ((preEntry)).add(data); });
     }
     else {
         allPreStyleElements.set(element, postEntry);
@@ -16793,7 +16825,7 @@ function replacePostStylesAsPre(element, allPreStyleElements, allPostStyleElemen
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-var AnimationEngine = (function () {
+var AnimationEngine = /** @class */ (function () {
     function AnimationEngine(_driver, normalizer) {
         var _this = this;
         this._driver = _driver;
@@ -16991,7 +17023,7 @@ var AnimationEngine = (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-var WebAnimationsPlayer = (function () {
+var WebAnimationsPlayer = /** @class */ (function () {
     function WebAnimationsPlayer(element, keyframes$$1, options, previousPlayers) {
         if (previousPlayers === void 0) { previousPlayers = []; }
         var _this = this;
@@ -17056,7 +17088,7 @@ var WebAnimationsPlayer = (function () {
         this._initialized = true;
         var /** @type {?} */ keyframes$$1 = this.keyframes.map(function (styles) { return copyStyles(styles, false); });
         var /** @type {?} */ previousStyleProps = Object.keys(this.previousStyles);
-        if (previousStyleProps.length) {
+        if (previousStyleProps.length && keyframes$$1.length) {
             var /** @type {?} */ startingKeyframe_1 = keyframes$$1[0];
             var /** @type {?} */ missingStyleProps_1 = [];
             previousStyleProps.forEach(function (prop) {
@@ -17309,7 +17341,7 @@ function _computeStyle(element, prop) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-var WebAnimationsDriver = (function () {
+var WebAnimationsDriver = /** @class */ (function () {
     function WebAnimationsDriver() {
     }
     /**
@@ -17415,22 +17447,15 @@ function supportsWebAnimations() {
 }
 
 /**
- * @license Angular v5.0.5
- * (c) 2010-2017 Google, Inc. https://angular.io/
+ * @license Angular v5.2.0
+ * (c) 2010-2018 Google, Inc. https://angular.io/
  * License: MIT
  */
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-var BrowserAnimationBuilder = (function (_super) {
+var BrowserAnimationBuilder = /** @class */ (function (_super) {
     __extends(BrowserAnimationBuilder, _super);
     function BrowserAnimationBuilder(rootRenderer, doc) {
         var _this = _super.call(this) || this;
@@ -17469,7 +17494,7 @@ var BrowserAnimationBuilder = (function (_super) {
     ]; };
     return BrowserAnimationBuilder;
 }(AnimationBuilder));
-var BrowserAnimationFactory = (function (_super) {
+var BrowserAnimationFactory = /** @class */ (function (_super) {
     __extends(BrowserAnimationFactory, _super);
     function BrowserAnimationFactory(_id, _renderer) {
         var _this = _super.call(this) || this;
@@ -17492,7 +17517,7 @@ var BrowserAnimationFactory = (function (_super) {
     };
     return BrowserAnimationFactory;
 }(AnimationFactory));
-var RendererAnimationPlayer = (function () {
+var RendererAnimationPlayer = /** @class */ (function () {
     function RendererAnimationPlayer(id, element, options, _renderer) {
         this.id = id;
         this.element = element;
@@ -17654,7 +17679,7 @@ function issueAnimationCommand(renderer, element, id, command, args) {
  */
 var ANIMATION_PREFIX = '@';
 var DISABLE_ANIMATIONS_FLAG = '@.disabled';
-var AnimationRendererFactory = (function () {
+var AnimationRendererFactory = /** @class */ (function () {
     function AnimationRendererFactory(delegate, engine, _zone) {
         this.delegate = delegate;
         this.engine = engine;
@@ -17802,12 +17827,12 @@ var AnimationRendererFactory = (function () {
     ]; };
     return AnimationRendererFactory;
 }());
-var BaseAnimationRenderer = (function () {
+var BaseAnimationRenderer = /** @class */ (function () {
     function BaseAnimationRenderer(namespaceId, delegate, engine) {
         this.namespaceId = namespaceId;
         this.delegate = delegate;
         this.engine = engine;
-        this.destroyNode = this.delegate.destroyNode ? function (n) { return /** @type {?} */ ((delegate.destroyNode))(n); } : null;
+        this.destroyNode = this.delegate.destroyNode ? function (n) { return ((delegate.destroyNode))(n); } : null;
     }
     Object.defineProperty(BaseAnimationRenderer.prototype, "data", {
         get: /**
@@ -18075,7 +18100,7 @@ var BaseAnimationRenderer = (function () {
     };
     return BaseAnimationRenderer;
 }());
-var AnimationRenderer = (function (_super) {
+var AnimationRenderer = /** @class */ (function (_super) {
     __extends(AnimationRenderer, _super);
     function AnimationRenderer(factory, namespaceId, delegate, engine) {
         var _this = _super.call(this, namespaceId, delegate, engine) || this;
@@ -18180,7 +18205,7 @@ function parseTriggerCallbackName(triggerName) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var InjectableAnimationEngine = (function (_super) {
+var InjectableAnimationEngine = /** @class */ (function (_super) {
     __extends(InjectableAnimationEngine, _super);
     function InjectableAnimationEngine(driver, normalizer) {
         return _super.call(this, driver, normalizer) || this;
@@ -18246,16 +18271,9 @@ var BROWSER_NOOP_ANIMATIONS_PROVIDERS = [{ provide: AnimationDriver, useClass: N
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * \@experimental Animation support is experimental.
  */
-var BrowserAnimationsModule = (function () {
+var BrowserAnimationsModule = /** @class */ (function () {
     function BrowserAnimationsModule() {
     }
     BrowserAnimationsModule.decorators = [
