@@ -4,6 +4,6 @@ export declare class OverlayComponent {
     leftToRightActive: boolean;
     customTrigger: boolean;
     overlayAnimationKind: OverlayAnimationKindType;
-    private toggleOverlayInternal(value?);
+    toggleOverlayInternal(value?: boolean): void;
     toggleOverlay(value?: boolean): void;
 }
