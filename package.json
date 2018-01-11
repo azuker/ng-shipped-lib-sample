@@ -14,7 +14,7 @@
     "npm": ">= 3.0.0"
   },
   "scripts": {
-    "clean": "rm -rf out-tsc dist/*",
+    "clean": "rm -rf out-tsc/* dist/*",
     "prebuild": "npm run clean",
     "build": "node build.js",
     "build-demo": "tsc -p src/demo/",
